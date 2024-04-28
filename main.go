@@ -1,6 +1,7 @@
 package main
 
 import (
+	"api-go/src/config"
 	"api-go/src/router"
 	"fmt"
 	"log"
@@ -9,10 +10,11 @@ import (
 
 func main() {
 
-	fmt.Println("Started API")
+	config.Carregar()
+	fmt.Println("Started API", config.Porta)
 
 	router := router.Gerar()
 
-	log.Fatal(http.ListenAndServe(":5000", router))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.Porta), router))
 
 }
